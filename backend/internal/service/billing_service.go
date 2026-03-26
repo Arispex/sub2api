@@ -435,9 +435,8 @@ func (s *BillingService) CalculateCostWithServiceTier(model string, tokens Usage
 		breakdown.CacheReadCost *= tierMultiplier
 	}
 
-	// 计算总费用
-	breakdown.TotalCost = breakdown.InputCost + breakdown.OutputCost +
-		breakdown.CacheCreationCost + breakdown.CacheReadCost
+	// 计算总费用（缓存 token 不计入账单，仅记录日志用于统计）
+	breakdown.TotalCost = breakdown.InputCost + breakdown.OutputCost
 
 	// 应用倍率计算实际费用
 	if rateMultiplier <= 0 {

@@ -51,7 +51,8 @@ func TestCalculateCost_WithCacheTokens(t *testing.T) {
 	require.InDelta(t, expectedCacheCreation, cost.CacheCreationCost, 1e-10)
 	require.InDelta(t, expectedCacheRead, cost.CacheReadCost, 1e-10)
 
-	expectedTotal := cost.InputCost + cost.OutputCost + expectedCacheCreation + expectedCacheRead
+	// 缓存费用不计入 TotalCost，仅记录日志
+	expectedTotal := cost.InputCost + cost.OutputCost
 	require.InDelta(t, expectedTotal, cost.TotalCost, 1e-10)
 }
 
